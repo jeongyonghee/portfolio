@@ -1,3 +1,4 @@
+@charset "utf-8";
 .memoji{
     height:80px;
 }
@@ -7,6 +8,3 @@
     text-align: center;;
 }
 
-i{
-    font-size:50px;
-}
