@@ -5,16 +5,17 @@
     /* Color */
     --color-white:#ffffff;
     --color-light-white:#eeeeee;
-    --color-dark-white:#bdbdbd;
+    --color-dark-white:#C9C9C9;
     --color-pink:#fe918d;
     --color-dark-pink:#ff6863;
     --color-black:#000000;
-    --color-dark-grey:#4d4d4d;
+    --color-dark-grey:#EAEAEA;
     --color-grey:#616161;
     --color-light-grey:#7c7979;
     --color-blue:#73aace;
     --color-yellow:#fff7d1;
     --color-orange:#feb546;
+    --color-green:#9BFF93;
     
     /* Font size */
     --font-large:48px;
@@ -29,11 +30,25 @@
     --weight-regular:400;
     
     /* Size */
+    --size-border-radius: 4px;
 }
 
 /* 전체 설정 */
 *{
     box-sizing:border-box;
+}
+body{
+    margin:0;
+    font-family: 'Open Sans', sans-serif;
+    cursor:default;
+}
+a{
+    text-decoration: none;
+    color:var(--color-white);
+}
+ul{
+    list-style:none;
+    padding-left:0px;
 }
 /* 폰트 설정 */
 h1{
@@ -58,12 +73,38 @@ h3{
 }
 
 
-.memoji{
-    height:80px;
-}
-.logo{
-    display:inline-block;
-    color:#000;
-    text-align: center;;
+
+
+
+/* Navbar */
+#navbar{
+    display:flex;
+    justify-content: space-between;
+    background-color:var(--color-dark-white);
+    align-items:center;
+    color:var(--color-white);
+    padding:16px;
 }
 
+.navbar__logo{
+    font-size:var(--font-medium);
+    font-weight:var(--weight-semi-bold);
+}
+
+.navbar__menu{
+    display:flex;
+}
+.navbar__menu__item{
+    padding:8px 12px;
+    margin:0 4px;
+    cursor: pointer;
+    border-radius: var(--size-border-radius);
+}
+
+.navbar__menu__item.active{
+    border:1px solid var(--color-white);
+}
+
+.navbar__menu__item:hover{
+    background-color:var(--color-light-grey);
+}
