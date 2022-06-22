@@ -294,7 +294,7 @@ h3{
 
 
 /* Work */
-
+.work{}
 .work__categories{
     margin:40px;
 }
@@ -337,6 +337,7 @@ h3{
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
+    margin-bottom:50px;
 }
 .project{
     position:relative;
@@ -405,7 +406,7 @@ h3{
 }
 
 .contact__title{
-    margin:32px 0;
+    margin:25px 0;
 }
 
 .contact__links{
