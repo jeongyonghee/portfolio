@@ -14,8 +14,10 @@
     --color-light-grey:#7c7979;
     --color-blue:#73aace;
     --color-yellow:#fff7d1;
+    --color-dark-yellow:#FFE400;
     --color-orange:#feb546;
     --color-green:#9BFF93;
+    --color-dark-green:#2F9D27;
     
     /* Font size */
     --font-large:48px;
@@ -102,7 +104,12 @@ h3{
     font-size:var(--font-medium);
     font-weight:var(--weight-semi-bold);
 }
-
+.navbar__logo i{
+    color:var(--color-dark-green);
+}
+.navbar__logo a{
+    color:var(--color-black);
+}
 .navbar__menu{
     display:flex;
 }
@@ -122,10 +129,20 @@ h3{
     background-color:var(--color-light-grey);
 }
 
+.navbar__toggle-btn{
+    position:absolute;
+    top:20px;
+    right:32px;
+    font-size:30px;
+    color:var(--color-white);
+    display:none;
+}
+
 /* Home */
 
 #home{
-    background:url("images/home-background.png")center/cover no-repeat;
+    background:url("images/home-background.png")
+    center/cover no-repeat;
     padding:40px;
     text-align:center;
 }
@@ -176,6 +193,10 @@ h3{
 }
 
 /* About */
+
+#about{
+    background-color: #FCFCFC
+}
 
 .about__majors{
     display:flex;
@@ -294,7 +315,7 @@ h3{
 
 
 /* Work */
-.work{}
+
 .work__categories{
     margin:40px;
 }
@@ -421,3 +442,37 @@ h3{
 .contact__links i:hover{
     transform:scale(1.2);
     color:var(--color-black);
+}
+
+/* 반응형 768px */
+
+@media screen and (max-width:768px){
+    .navbar__toggle-btn{
+        display:block;
+    }
+    #navbar{
+        flex-direction: column;
+        align-items:flex-start;
+    }
+    .navbar__menu{
+        flex-direction:column;
+        text-align:center;
+        width:100%;
+        display:none;
+    }
+
+    .major{
+        margin-bottom: 35px;
+    }
+    .about__majors{
+        flex-direction:column;
+    }
+
+    .skillset{
+        flex-direction: column;
+    }
+
+    .project{
+        flex-grow:1;
+    }
+}
