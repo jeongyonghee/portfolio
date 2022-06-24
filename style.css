@@ -109,6 +109,7 @@ h3{
     background-color:var(--color-dark-white);
     padding:8px;
     padding-right:40px;
+    z-index:9999;
 }
 
 .navbar__logo{
