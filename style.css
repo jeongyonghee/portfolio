@@ -190,7 +190,7 @@ h3{
 }
 .home__contact:hover{
     background-color:var(--color-yellow);
-    transform:scale(1.15)
+    transform:scale(1.15);
 }
 /* Section common */
 
