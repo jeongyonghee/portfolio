@@ -457,6 +457,23 @@ h3{
     color:var(--color-black);
 }
 
+/* arrow */
+
+.arrow-up{
+    position:fixed;
+    bottom:50px;
+    right:50px;
+    font-size:50px;
+    color:var(--color-blue);
+    opacity:0;
+    transition: all var(--animation-duration) ease-in;
+    pointer-events: none;
+}
+
+.arrow-up.visible{
+    opacity:1;
+    pointer-events: auto;
+}
 /* 반응형 768px */
 
 @media screen and (max-width:768px){

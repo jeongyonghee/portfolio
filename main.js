@@ -48,3 +48,19 @@ document.addEventListener('scroll',()=>{
     home.style.opacity = 1 - window.scrollY / homeHeight;
 })
 
+
+// 화살표 버튼 
+const arrow = document.querySelector('.arrow-up')
+document.addEventListener('scroll',()=>{
+    if(window.scrollY > homeHeight/4){
+        arrow.classList.add('visible');
+    }else{
+        arrow.classList.remove('visible');
+    }
+})
+
+// 화살표 버튼 클릭 시 맨 위로
+
+arrow.addEventListener('click',()=>{
+    scrollIntoView('#home')
+})
