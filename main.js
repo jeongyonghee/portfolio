@@ -65,7 +65,7 @@ arrow.addEventListener('click',()=>{
     scrollIntoView('#home')
 })
 
-// 프로젝트
+// 프로젝트 보여지기 
 
 const workBtnContainer = document.querySelector('.work__categories');
 const projectContainer = document.querySelector('.work__project');
@@ -80,6 +80,14 @@ workBtnContainer.addEventListener('click',(e)=>{
     // for(let i=0; i < projects.length; i++){
     //     project = projects[i]
     // }
+
+    // 액티브 활성화 버튼
+    const active = document.querySelector('.category__btn.selected');
+    active.classList.remove('selected');
+    const target = e.target.nodeName === 'BUTTON' ? e.target : e.target.parentNode;
+    target.classList.add('selected');
+    
+    // 프로젝트 애니메이션
     projectContainer.classList.add('animation');
     setTimeout(()=>{
         projects.forEach((project)=>{
@@ -92,3 +100,6 @@ workBtnContainer.addEventListener('click',(e)=>{
         projectContainer.classList.remove('animation');
     },300);
 })
+
+
+
