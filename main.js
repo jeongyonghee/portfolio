@@ -22,10 +22,15 @@ navbarMenu.addEventListener('click',(event)=>{
     if(link == null){
         return;
     }
-    // console.log(event.target.dataset.link);
+    navbarMenu.classList.remove('open');
     scrollIntoView(link)
 })
 
+// 네비게이션바 햄버거 버튼
+const navbarToggleBtn = document.querySelector('.navbar__toggle-btn');
+navbarToggleBtn.addEventListener('click',()=>{
+    navbarMenu.classList.toggle('open');
+});
 
 // 컨택 미 스크롤링
 const contact = document.querySelector('.home__contact');
