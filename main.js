@@ -1,5 +1,19 @@
 'use strict';
+//미모지 클릭 시 이미지 변경 (토글로 수정해야함 공부 필요)
+// const memoji = document.querySelector('.home__avatar');
+// memoji.addEventListener('click',()=>{ 
+//     memoji.src = './images/yonghee2.png'
+// })
 
+
+// 미모지 마우스 오버 시 이미지 변경
+const memoji = document.querySelector('.home__avatar');
+memoji.addEventListener('mouseover',()=>{
+    memoji.src = './images/yonghee2.png'  
+})
+memoji.addEventListener('mouseout',()=>{
+    memoji.src = './images/yonghee.png'  
+})
 
 // 네비게이션 바 픽스 
 const navbar = document.querySelector('#navbar');
@@ -11,7 +25,7 @@ document.addEventListener('scroll',()=>{
     }else{
         navbar.classList.remove('navbar--dark');
     }
-})
+});
 
 //네비게이션바 + 스크롤링
 
