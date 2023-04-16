@@ -1,19 +1,29 @@
 'use strict';
-//미모지 클릭 시 이미지 변경 (토글로 수정해야함 공부 필요)
-// const memoji = document.querySelector('.home__avatar');
-// memoji.addEventListener('click',()=>{ 
-//     memoji.src = './images/yonghee2.png'
-// })
+//미모지 클릭 시 이미지 변경 
 
 
-// 미모지 마우스 오버 시 이미지 변경
 const memoji = document.querySelector('.home__avatar');
-memoji.addEventListener('mouseover',()=>{
-    memoji.src = './images/yonghee2.png'  
-})
-memoji.addEventListener('mouseout',()=>{
-    memoji.src = './images/yonghee.png'  
-})
+let toggle = false
+memoji.addEventListener('click',()=>{
+    if(toggle == false){ 
+        memoji.src = './images/yonghee2.png';
+        toggle = true;
+    }else{
+        memoji.src ='./images/yonghee.png';
+        toggle = false;
+    }
+});
+
+// const navbar = document.querySelectorAll('.navbar__menu__item > li');
+// navbar.addEventListener('mouseover',(e)=>{
+//     const target = e.target;
+//     const link = target.dataset.link;
+//     if( link == null){
+//         navbar.classList.remove('action')
+//     }else{
+//         navbar.classList.add('action');
+//     }
+// })
 
 // 네비게이션 바 픽스 
 const navbar = document.querySelector('#navbar');
@@ -27,11 +37,11 @@ document.addEventListener('scroll',()=>{
     }
 });
 
-//네비게이션바 + 스크롤링
+//네비게이션바 클릭 시 지정 섹션으로 스크롤링
 
 const navbarMenu = document.querySelector('.navbar__menu');
-navbarMenu.addEventListener('click',(event)=>{
-    const target = event.target;
+navbarMenu.addEventListener('click',(e)=>{ 
+    const target = e.target;
     const link = target.dataset.link;
     if(link == null){
         return;
@@ -53,14 +63,16 @@ contact.addEventListener('click',()=>{
     scrollIntoView('#contact')
 })
 
+// 스크롤링 함수 
 function scrollIntoView(selector){
     const scrollTo = document.querySelector(selector);
     scrollTo.scrollIntoView({behavior:'smooth'});
+    selectNavItem(navItems[sectionIds.indexOf(selector)]);
 }
 
-// 스크롤링 시 투명하게 만들기
+// 스크롤링 시 섹션  투명하게 만들기
 
-const home = document.querySelector('#home');
+const home = document.querySelector('.home__container');
 const homeHeight = home.getBoundingClientRect().height;
 
 document.addEventListener('scroll',()=>{
@@ -71,7 +83,7 @@ document.addEventListener('scroll',()=>{
 // 화살표 버튼 
 const arrow = document.querySelector('.arrow-up')
 document.addEventListener('scroll',()=>{
-    if(window.scrollY > homeHeight/4){
+    if(window.scrollY > homeHeight/2){
         arrow.classList.add('visible');
     }else{
         arrow.classList.remove('visible');
@@ -94,12 +106,6 @@ workBtnContainer.addEventListener('click',(e)=>{
     if(filter==null){
         return;
     }
-    // forEach는
-    // let project;
-    // for(let i=0; i < projects.length; i++){
-    //     project = projects[i]
-    // }
-
     // 액티브 활성화 버튼
     const active = document.querySelector('.category__btn.selected');
     active.classList.remove('selected');
@@ -120,5 +126,66 @@ workBtnContainer.addEventListener('click',(e)=>{
     },300);
 })
 
+// 모든 섹션 요소들을 가지고 온다.
+// IntersectionObserver를 이용해서 모든 섹션들을 관찰한다.
+// 보여지는 섹션에 해당하는 메뉴 아이템을 활성화 시킨다.
+
+const sectionIds = [
+    '#home', 
+    '#about', 
+    '#skills', 
+    '#work', 
+    '#contact',
+]
+// 이 배열을 빙글빙글 돌면서 각각의 섹션 돔 요소로 변환하는 새로운 배열로 만든다.
+// 이렇게 만드는 api는 map 
+const sections = sectionIds.map(id => document.querySelector(id));
+const navItems = sectionIds.map(id => document.querySelector(`[data-link='${id}']`))
+
+let selectedNavIndex = 0;
+let selectedNavItem = navItems[0];
+
+function selectNavItem(selected){
+    selectedNavItem.classList.remove('active');
+    selectedNavItem = selected;
+    selectedNavItem.classList.add('active')
+}
 
 
+
+
+
+const observerOptions = {
+    root:null,
+    rootMargin:'0px',
+    threshold: 0.7,
+}
+
+
+const observerCallback = (entries, observer)=>{
+    entries.forEach(entry => {
+        if(!entry.isIntersecting && entry.intersectionRatio > 0 ){
+            const index = sectionIds.indexOf(`#${entry.target.id}`);
+            // -가 된다면 스크롤링이 아래로 되어서 페이지가 올라옴
+            if(entry.boundingClientRect.y <0){
+                selectedNavIndex = index +1;
+            }else{
+                selectedNavIndex = index -1;
+            }
+        }
+    })
+}
+
+
+const observer = new IntersectionObserver(observerCallback,observerOptions);
+sections.forEach(section => observer.observe(section));
+
+window.addEventListener('wheel', ()=>{
+    if(window.scrollY === 0 ){
+        selectedNavIndex = 0;
+    }else if(
+        Math.round(window.scrollY+window.scrollHeight) >= document.body.clientHeight){
+        selectedNavIndex = navItems.length - 1;
+    }
+    selectNavItem(navItems[selectedNavIndex]);
+})
